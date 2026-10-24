@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Student Information Chatbot</title>
+<meta name="description" content="An AI powered 3D web experience for the Student Information Chatbot mini project." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#hero">
+    <span class="brand-mark"><span class="brand-dot"></span></span>
+    <span class="brand-text">Student<b>Bot</b></span>
+  </a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#about">Overview</a>
+    <a href="#demo">Live Demo</a>
+    <a href="#features">Features</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#stack">Tech Stack</a>
+  </nav>
+  <button class="nav-cta" data-scroll="#demo">Try the bot</button>
+  <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <canvas id="scene"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="pill reveal">Mini Project &nbsp;&middot;&nbsp; Artificial Intelligence</div>
+    <h1 class="hero-title reveal">
+      <span class="line">Student</span>
+      <span class="line grad">Information</span>
+      <span class="line">Chatbot</span>
+    </h1>
+    <p class="hero-sub reveal">
+      A conversational AI assistant that answers student queries about attendance, results,
+      fees, timetables and campus services &mdash; instantly, 24&times;7, in natural language.
+    </p>
+    <div class="hero-actions reveal">
+      <button class="btn btn-primary" data-scroll="#demo">Start chatting <span>&rarr;</span></button>
+      <button class="btn btn-ghost" data-scroll="#architecture">How it works</button>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><b data-count="24">0</b><span>&times;7 availability</span></div>
+      <div class="stat"><b data-count="40">0</b><span>+ trained intents</span></div>
+      <div class="stat"><b data-count="95">0</b><span>% query match</span></div>
+      <div class="stat"><b data-count="1">0</b><span>s avg response</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span></span>scroll</div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <span class="eyebrow">01 &mdash; Overview</span>
+    <h2>Why a chatbot for student information?</h2>
+    <p>Students lose hours in queues and inboxes waiting for answers that already sit in the
+       college database. The bot puts that data one sentence away.</p>
+  </div>
+
+  <div class="split">
+    <div class="tilt-card problem reveal">
+      <div class="card-glow"></div>
+      <h3><i class="ic">&#9203;</i> The problem</h3>
+      <ul>
+        <li>Office desks handle the same repeated queries all day.</li>
+        <li>Notices get lost across groups, boards and mails.</li>
+        <li>No help outside working hours or on holidays.</li>
+        <li>First-year students do not know whom to ask.</li>
+      </ul>
+    </div>
+    <div class="tilt-card solution reveal">
+      <div class="card-glow"></div>
+      <h3><i class="ic">&#9889;</i> Our solution</h3>
+      <ul>
+        <li>An NLP engine maps a free-text question to an intent.</li>
+        <li>The matching record is fetched from the student database.</li>
+        <li>A reply lands in seconds, on any device, at any hour.</li>
+        <li>Unknown queries are escalated to the department desk.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section class="section" id="demo">
+  <div class="section-head reveal">
+    <span class="eyebrow">02 &mdash; Live Demo</span>
+    <h2>Talk to the bot</h2>
+    <p>A working prototype running entirely in your browser. Ask about attendance, results,
+       fees, timetable, library or faculty &mdash; or look up a roll number such as
+       <code>21CS001</code>.</p>
+  </div>
+
+  <div class="chat-stage reveal">
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="chat-title"><span class="live"></span> StudentBot &middot; online</div>
+        <button class="chat-reset" id="chatReset" title="Restart conversation">&#8635;</button>
+      </div>
+      <div class="chat-body" id="chatBody"></div>
+      <div class="chips" id="chips">
+        <button type="button">My attendance</button>
+        <button type="button">Show my results</button>
+        <button type="button">Fee status</button>
+        <button type="button">Timetable for today</button>
+        <button type="button">Library books</button>
+        <button type="button">Exam schedule</button>
+      </div>
+      <form class="chat-input" id="chatForm" autocomplete="off">
+        <input id="chatInput" placeholder="Ask me anything about college..." aria-label="Message" />
+        <button type="submit" aria-label="Send">&#10148;</button>
+      </form>
+    </div>
+    <div class="chat-shadow"></div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="section-head reveal">
+    <span class="eyebrow">03 &mdash; Features</span>
+    <h2>What it can do</h2>
+    <p>Hover a card to flip it.</p>
+  </div>
+
+  <div class="grid">
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#127891;</i><h4>Academic records</h4><p>Marks, CGPA, backlogs</p></div>
+      <div class="flip-b"><p>Pulls semester-wise marks, internal assessment scores and CGPA straight from the results table and formats them as a readable summary.</p></div>
+    </div></div>
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#128197;</i><h4>Attendance tracker</h4><p>Subject-wise percentage</p></div>
+      <div class="flip-b"><p>Shows subject-wise attendance, warns when a student falls below the 75% detention line and counts the lectures still needed.</p></div>
+    </div></div>
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#128179;</i><h4>Fees &amp; scholarship</h4><p>Dues and deadlines</p></div>
+      <div class="flip-b"><p>Reports paid and pending fees, due dates, receipt numbers and the status of a scholarship application.</p></div>
+    </div></div>
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#128467;</i><h4>Timetable &amp; exams</h4><p>Daily and exam plans</p></div>
+      <div class="flip-b"><p>Answers what the next lecture is, lists the day timetable and returns the published examination schedule with venues.</p></div>
+    </div></div>
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#128218;</i><h4>Library desk</h4><p>Issued books, fines</p></div>
+      <div class="flip-b"><p>Lists issued books with return dates, calculates overdue fines and checks whether a title is on the shelf.</p></div>
+    </div></div>
+    <div class="flip reveal"><div class="flip-in">
+      <div class="flip-f"><i>&#129517;</i><h4>Campus guide</h4><p>Faculty, departments</p></div>
+      <div class="flip-b"><p>Finds faculty cabins and contacts, department details, hostel and transport rules, and the admission procedure.</p></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section" id="architecture">
+  <div class="section-head reveal">
+    <span class="eyebrow">04 &mdash; Architecture</span>
+    <h2>How a question becomes an answer</h2>
+    <p>Five layers, one round trip.</p>
+  </div>
+
+  <div class="pipeline">
+    <div class="layer reveal" style="--i:0">
+      <span class="num">01</span>
+      <h4>User interface</h4>
+      <p>The web chat widget captures the query and renders the reply.</p>
+    </div>
+    <div class="layer reveal" style="--i:1">
+      <span class="num">02</span>
+      <h4>Pre-processing</h4>
+      <p>Tokenise, lowercase, drop stop words, lemmatise, build a bag of words.</p>
+    </div>
+    <div class="layer reveal" style="--i:2">
+      <span class="num">03</span>
+      <h4>Intent classification</h4>
+      <p>The trained model scores the query against every known intent.</p>
+    </div>
+    <div class="layer reveal" style="--i:3">
+      <span class="num">04</span>
+      <h4>Entities &amp; database</h4>
+      <p>Roll number, subject or date are extracted and the records are queried.</p>
+    </div>
+    <div class="layer reveal" style="--i:4">
+      <span class="num">05</span>
+      <h4>Response generation</h4>
+      <p>The response template is filled and sent back to the chat window.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="section" id="stack">
+  <div class="section-head reveal">
+    <span class="eyebrow">05 &mdash; Tech Stack</span>
+    <h2>Built with</h2>
+    <p>A light stack that runs on a college lab machine.</p>
+  </div>
+  <div class="stack-grid">
+    <div class="chip3d reveal"><b>Python</b><span>Core logic</span></div>
+    <div class="chip3d reveal"><b>NLTK</b><span>Text processing</span></div>
+    <div class="chip3d reveal"><b>TensorFlow</b><span>Intent model</span></div>
+    <div class="chip3d reveal"><b>Flask</b><span>REST API</span></div>
+    <div class="chip3d reveal"><b>MySQL</b><span>Student records</span></div>
+    <div class="chip3d reveal"><b>JavaScript</b><span>Chat widget</span></div>
+    <div class="chip3d reveal"><b>Three.js</b><span>3D interface</span></div>
+    <div class="chip3d reveal"><b>JSON</b><span>Intent corpus</span></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="foot-top">
+    <h3>Student Information Chatbot</h3>
+    <p>Artificial Intelligence &mdash; Mini Project</p>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; <span id="year"></span> &middot; Built with Three.js</span>
+    <button class="to-top" data-scroll="#hero">Back to top &uarr;</button>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
